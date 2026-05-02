@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soundbox"
+version = "0.1.0"
+description = "CLI downloader for YouTube, SoundCloud and Spotify with quality presets."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "soundbox contributors" }]
+keywords = ["youtube", "soundcloud", "spotify", "downloader", "yt-dlp", "spotdl", "music"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Environment :: Console",
+]
+dependencies = [
+    "yt-dlp>=2024.8.6",
+    "click>=8.1",
+    "mutagen>=1.47",
+    "rich>=13.7",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+spotify = ["spotdl>=4.2.5"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6.0",
+]
+
+[project.scripts]
+soundbox = "soundbox.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/hwidfunp-bit/soundbox"
+Issues = "https://github.com/hwidfunp-bit/soundbox/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "C4"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
